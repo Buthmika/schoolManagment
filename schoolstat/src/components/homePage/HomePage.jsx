@@ -12,6 +12,10 @@ function HomePage() {
                   <img src={HomePageImage} alt="" />
             </div>
       </div>
+      <div className="button">
+            <button>Sign Up</button>
+            <button>Login</button>
+      </div>
       
 
 </div>
