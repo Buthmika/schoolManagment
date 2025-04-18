@@ -1,0 +1,14 @@
+*{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      
+}
+.mainImage{
+      padding-left: 380px;
+      padding-top: 60px;
+}
+.mainImage img{
+      width: 600px;
+      border-radius: 20px;
+}
