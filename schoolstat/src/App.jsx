@@ -1,4 +1,4 @@
-import Nav from './components/nav.jsx'
+import HomePage from "./components/homePage/HomePage"
 
 
 function App() {
@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <Nav></Nav>
+      <HomePage></HomePage>
     </>
   )
 }
