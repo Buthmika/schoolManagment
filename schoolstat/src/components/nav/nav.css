@@ -28,3 +28,22 @@ nav a{
       color: black;
       font-weight: 600;
 }
+nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #6a00ff, #c300ff);
+      transition: width 0.3s ease-in-out;
+      border-radius: 4px;
+    }
+    
+    nav a:hover {
+      color: #6a00ff;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
