@@ -1,4 +1,5 @@
 import HomePage from "./components/homePage/HomePage"
+import Login from "./components/loginPage/Login"
 
 
 function App() {
@@ -6,7 +7,8 @@ function App() {
 
   return (
     <>
-      <HomePage></HomePage>
+      {/* <HomePage></HomePage> */}
+      <Login></Login>
     </>
   )
 }
