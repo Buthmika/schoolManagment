@@ -5,8 +5,9 @@ import background from '../../assets/image.webp'
 function Login() {
   return (
     <div className="login-wrapper" style={{ backgroundImage: `url(${background})` }}>
-      <h1>Login to SchoolStat</h1>
+      
       <div className="info">
+      <h1>Login to SchoolStat</h1>
         <div className="userName">
           <label htmlFor="username">Username</label>
           <input type="text" id="username" name='userName' placeholder="Enter your username" required />
