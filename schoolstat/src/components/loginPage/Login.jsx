@@ -1,6 +1,6 @@
 import React from 'react'
 import './Login.css'
-import background from '../../assets/image.png'
+import background from '../../assets/image.webp'
 
 function Login() {
   return (
