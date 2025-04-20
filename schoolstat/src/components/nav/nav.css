@@ -5,15 +5,13 @@
       font-family: 'Poppins', sans-serif;
      
 }
-body{
-      background: #C493FF;
-}
+
 nav{
       display: flex;
       padding-left: 700px;
       gap: 100px;
       padding-top: 20px;
-      background: rgb(233, 199, 240);
+      background:rgb(92, 155, 212);
       height: 60px;
       
      
@@ -41,7 +39,7 @@ nav a::after {
     }
     
     nav a:hover {
-      color: #6a00ff;
+      color: #3555be;
     }
     
     nav a:hover::after {
