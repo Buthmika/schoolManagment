@@ -1,0 +1,32 @@
+body{
+      background: white;
+}
+*{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+}
+.info{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      background:violet ;
+      width: 800px;
+      height: 600px;
+      margin-left: 300px;
+      padding-right: 500px;
+      
+}
+.userName{
+      display: flex;
+      flex-direction: column;
+}
+.password{
+      display: flex;
+      flex-direction: column;
+}
+
+    
