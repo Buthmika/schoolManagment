@@ -14,11 +14,12 @@ body{
       align-items: center;
       flex-direction: column;
       gap: 20px;
-      background:rgba(238, 130, 238, 0.5); 
-      width: 800px;
-      height: 600px;
-      margin-left: 300px;
-      padding-right: 120px;
+      background:rgba(61, 123, 182, 0.8); 
+      width: 500px;
+      height: 400px;
+      margin-left: 400px;
+      border-radius: 20px;
+      
       
 }
 .userName{
@@ -35,6 +36,7 @@ input{
       border: none;
       border-radius: 10px;
       padding-left: 15px;
+      background: rgb(234, 243, 251);
 }
 .login-wrapper {
       background-size: cover;
