@@ -19,16 +19,20 @@ body{
       height: 400px;
       margin-left: 400px;
       border-radius: 20px;
+      margin-top: 60px;
       
       
 }
 .userName{
       display: flex;
       flex-direction: column;
+      
 }
 .password{
       display: flex;
       flex-direction: column;
+      margin-bottom: 40px;
+
 }
 input{
       width: 430px;
@@ -46,4 +50,10 @@ input{
       padding-top: 60px;
     }
     
+.info h1{
+      color: white;
+      font-size: 30px;
+      font-weight: 600;
+      margin-bottom: 20px;
+}
     
