@@ -37,10 +37,11 @@ body{
 input{
       width: 430px;
       height: 50px;
-      border: none;
+      border:rgb(150, 184, 216) solid 2px ;
       border-radius: 10px;
       padding-left: 15px;
       background: rgb(234, 243, 251);
+      
 }
 .login-wrapper {
       background-size: cover;
@@ -54,6 +55,15 @@ input{
       color: white;
       font-size: 30px;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
+}
+.submit button{
+      width: 120px;
+      height: 38px;
+      border: rgb(61, 123, 182) solid 2px;
+      border-radius: 10px;
+      margin-right: 20px;
+      font-size: 15px;
+      font-weight: 800;
 }
     
