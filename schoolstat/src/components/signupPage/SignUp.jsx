@@ -1,10 +1,15 @@
 import React from 'react'
 import './SignUp.css'
+import SignUpImage from '../../assets/signup.png'
 
 function SignUp() {
   return (
     <div>
 <div class="signup-wrapper">
+  <div className="signImage">
+    <img src={SignUpImage} alt="Sign Up" className="signup-image" />
+  </div>
+  <div className="formDetail">
   <form class="signup-form">
     <h2>Sign Up to SchoolStat</h2>
 
@@ -24,6 +29,7 @@ function SignUp() {
       Already have an account? <a href="/login">Login</a>
     </p>
   </form>
+  </div>
 </div>
 
     </div>
