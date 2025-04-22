@@ -6,12 +6,17 @@ body {
     }
     
     .signup-wrapper {
-      min-height: 100vh;
+      
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 40px;
-      padding-right: 100px;
+      gap: 30px;
+      margin-left: 250px;
+      margin-top: 40px;
+      background-color:rgb(61, 123, 182 ,0.4); /* Semi-transparent background */;
+      width: 800px;
+      height: 600px;
+      border-radius: 20px;
     }
     
     .signup-form {
@@ -37,9 +42,9 @@ body {
     }
     
     .signup-form button {
-      background-color: #2B3A55;
-      color: white;
-      border: none;
+      border: rgb(61, 123, 182) solid 2px;
+      
+      
       padding: 10px;
       width: 100%;
       font-size: 16px;
@@ -65,4 +70,5 @@ body {
     .signImage img{
       width: 350px;
       height: 350px;
+      border-radius: 20px;
     }
