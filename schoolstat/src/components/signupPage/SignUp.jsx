@@ -32,7 +32,7 @@ function SignUp() {
   </div>
 </div>
 
-    </div>
+</div>
   )
 }
 
