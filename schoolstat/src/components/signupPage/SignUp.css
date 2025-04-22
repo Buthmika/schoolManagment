@@ -10,15 +10,16 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
+      gap: 40px;
+      padding-right: 100px;
     }
     
     .signup-form {
-      background-color: rgba(61, 123, 182, 0.9); /* Transparent blue */
       padding: 40px;
       border-radius: 20px;
       width: 350px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-      color: #fff;
+     
+      height: 500px;
     }
     
     .signup-form h2 {
@@ -60,4 +61,8 @@ body {
     .login-link a {
       color: #fff;
       text-decoration: underline;
+    }
+    .signImage img{
+      width: 350px;
+      height: 350px;
     }
