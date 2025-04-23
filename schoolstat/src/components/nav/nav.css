@@ -8,11 +8,15 @@
 
 nav{
       display: flex;
-      padding-left: 700px;
+      margin-left: 600px;
       gap: 100px;
-      padding-top: 20px;
-      background:rgb(92, 155, 212);
+      padding-top: 15px;
+      margin-top: 10px;
+      background: rgba(0, 0, 0, 0.5);
       height: 60px;
+      width: 700px;
+      padding-left: 40px;
+      border-radius: 40px;
       
      
 }
