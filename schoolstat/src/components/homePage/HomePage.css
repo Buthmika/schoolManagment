@@ -11,15 +11,14 @@ body {
   background-color: aqua;
 }
 
-/* Make background image full screen and cover */
 .login-wrapper {
   height: 100vh;
   background-size: cover;
   background-position: center;
   position: relative;
+  overflow: hidden;
 }
 
-/* Make nav stick to the top */
 .navi {
   position: absolute;
   top: 0;
@@ -27,14 +26,13 @@ body {
   z-index: 1000;
 }
 
-/* Style for the centered content box */
 .mainContent {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   width: 500px;
   height: 400px;
   margin: 100px auto 0 auto;
@@ -42,9 +40,24 @@ body {
   padding: 20px;
   color: white;
   text-align: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-/* Button styling */
+/* Animation for fade and slide in */
+.animate-fade-slide {
+  animation: fadeSlide 1.2s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeSlide {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button styling with animation */
 .button {
   display: flex;
   gap: 60px;
@@ -54,17 +67,50 @@ body {
 .button button {
   padding: 10px 20px;
   border-radius: 10px;
-  border: rgb(61, 123, 182) solid 2px;
-  background: white;
-  color: black;
+  border: 2px solid #16a085;
+  background: #ffffff;
+  color: #16a085;
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
   width: 150px;
   height: 50px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 10px rgba(22, 160, 133, 0.4);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
 }
 
-/* Highlight style */
-.highlight {
-  color: #ffd700;
+.button button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #16a085;
+  z-index: -1;
+  transition: left 0.3s ease-in-out;
 }
+
+.button button:hover::before {
+  left: 0;
+}
+
+.button button:hover {
+  color: white;
+  box-shadow: 0 0 15px rgba(22, 160, 133, 0.8);
+  transform: scale(1.07);
+}
+
+/* Highlight animation */
+.highlight {
+  color: rgba(22, 160, 133, 0.9);
+  font-weight: bold;
+}
+  
+
+
+
+
