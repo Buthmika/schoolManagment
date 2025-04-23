@@ -1,6 +1,6 @@
 import React from 'react'
 import './SignUp.css'
-import SignUpImage from '../../assets/signup.png'
+import SignUpImage from '../../assets/signup1.png'
 
 function SignUp() {
   return (
