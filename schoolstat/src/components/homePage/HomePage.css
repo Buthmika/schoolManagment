@@ -4,29 +4,51 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* ❌ Remove background-color from here */
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: aqua; /* ✅ Apply it only to the body */
+  background-color: aqua;
 }
 
-.mainImage {
-  padding-left: 380px;
-  padding-top: 60px;
+/* Make background image full screen and cover */
+.login-wrapper {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
 
-.mainImage img {
-  width: 600px;
+/* Make nav stick to the top */
+.navi {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Style for the centered content box */
+.mainContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  width: 500px;
+  height: 400px;
+  margin: 100px auto 0 auto;
   border-radius: 20px;
+  padding: 20px;
+  color: white;
+  text-align: center;
 }
 
+/* Button styling */
 .button {
-  padding-left: 520px;
   display: flex;
   gap: 60px;
-  padding-top: 40px;
+  padding-top: 20px;
 }
 
 .button button {
@@ -40,4 +62,9 @@ body {
   cursor: pointer;
   width: 150px;
   height: 50px;
+}
+
+/* Highlight style */
+.highlight {
+  color: #ffd700;
 }
