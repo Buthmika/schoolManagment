@@ -1,49 +1,15 @@
-body{
+body {
       background: white;
-      
-}
-*{
+    }
+    
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
-}
-.info{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 20px;
-      background:rgba(0, 0, 0, 0.4);
-      width: 500px;
-      height: 400px;
-      margin-left: 400px;
-      border-radius: 20px;
-      margin-top: 60px;
-      
-      
-}
-.userName{
-      display: flex;
-      flex-direction: column;
-      
-}
-.password{
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 40px;
-
-}
-input{
-      width: 430px;
-      height: 50px;
-      border:rgb(150, 184, 216) solid 2px ;
-      border-radius: 10px;
-      padding-left: 15px;
-      background: rgb(234, 243, 251);
-      
-}
-.login-wrapper {
+    }
+    
+    .login-wrapper {
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -51,19 +17,66 @@ input{
       padding-top: 60px;
     }
     
-.info h1{
-      color: white;
+    /* Login container */
+    .info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      background: rgba(0, 0, 0, 0.4);
+      width: 500px;
+      height: 400px;
+      margin: 60px auto 0 auto;
+      border-radius: 20px;
+      padding: 20px;
+    }
+    
+    /* Heading style */
+    .info h1 {
+      color: rgba(22, 160, 133, 1); /* Updated color */
       font-size: 30px;
       font-weight: 600;
       margin-bottom: 10px;
-}
-.submit button{
+    }
+    
+    /* Input fields */
+    .userName,
+    .password {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .password {
+      margin-bottom: 40px;
+    }
+    
+    input {
+      width: 430px;
+      height: 50px;
+      border: rgb(150, 184, 216) solid 2px;
+      border-radius: 10px;
+      padding-left: 15px;
+      background: rgb(234, 243, 251);
+    }
+    
+    /* Submit Button */
+    .submit button {
       width: 120px;
       height: 38px;
-      border: rgb(61, 123, 182) solid 2px;
+      border: rgba(22, 160, 133, 0.9) solid 2px;
       border-radius: 10px;
-      margin-right: 20px;
       font-size: 15px;
       font-weight: 800;
-}
+      background: white;
+      color: black;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+    
+    .submit button:hover {
+      background-color: rgba(22, 160, 133, 0.9);
+      color: white;
+      transform: scale(1.05);
+    }
     
