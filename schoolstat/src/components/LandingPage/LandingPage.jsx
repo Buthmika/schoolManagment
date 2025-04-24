@@ -19,7 +19,7 @@ function LandingPage() {
           </span>
         </span>
       </span>
-      Enabled toggle label
+      Character Certificate
     </label>
 
     
@@ -34,7 +34,7 @@ function LandingPage() {
           </span>
         </span>
       </span>
-      Disabled toggle label
+      leaving Certificate
     </label>
   </div>
 </div>
