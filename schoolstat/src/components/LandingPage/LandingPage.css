@@ -78,4 +78,8 @@
     .toggle__input:checked + .toggle-track .checkMark {
       opacity: 1;
     }
+    .card{
+      padding-left: 500px;
+      padding-top: 300px;
+    }
     
