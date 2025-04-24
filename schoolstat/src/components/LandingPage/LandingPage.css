@@ -4,8 +4,8 @@
       --track-width: 60px;
       --track-border: #999;
       --track-background: #eee;
-      --toggle-dark: rgba(22, 160, 133, 0.8); /* your theme color */
-      --focus-ring: 0 0 0 2px rgba(22, 160, 133, 0.8);
+      --toggle-dark: #333;
+      --focus-ring: 0 0 0 2px #333;
       --transition-speed: 0.25s;
     }
     
@@ -17,8 +17,10 @@
     .toggle {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       font-weight: 700;
       margin-bottom: 16px;
+      width: 300px;
     }
     
     .toggle__input {
@@ -48,10 +50,11 @@
       border-radius: 100px;
       width: var(--track-width);
       height: var(--track-height);
-      margin-right: 12px;
+      margin-left: 12px;
       position: relative;
       cursor: pointer;
       display: flex;
+      transition: background-color var(--transition-speed);
     }
     
     .toggle-indicator {
@@ -65,7 +68,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform var(--transition-speed), background-color var(--transition-speed);
+      transition: transform var(--transition-speed);
     }
     
     .checkMark {
@@ -78,7 +81,6 @@
     
     .toggle__input:checked + .toggle-track .toggle-indicator {
       transform: translateX(30px);
-      background-color: var(--toggle-dark);
     }
     
     .toggle__input:checked + .toggle-track .checkMark {
