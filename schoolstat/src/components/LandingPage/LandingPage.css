@@ -4,9 +4,14 @@
       --track-width: 60px;
       --track-border: #999;
       --track-background: #eee;
-      --toggle-dark: #333;
-      --focus-ring: 0 0 0 2px #333;
+      --toggle-dark: rgba(22, 160, 133, 0.8); /* your theme color */
+      --focus-ring: 0 0 0 2px rgba(22, 160, 133, 0.8);
       --transition-speed: 0.25s;
+    }
+    
+    .card {
+      padding-left: 500px;
+      padding-top: 300px;
     }
     
     .toggle {
@@ -60,7 +65,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform var(--transition-speed);
+      transition: transform var(--transition-speed), background-color var(--transition-speed);
     }
     
     .checkMark {
@@ -73,13 +78,10 @@
     
     .toggle__input:checked + .toggle-track .toggle-indicator {
       transform: translateX(30px);
+      background-color: var(--toggle-dark);
     }
     
     .toggle__input:checked + .toggle-track .checkMark {
       opacity: 1;
-    }
-    .card{
-      padding-left: 500px;
-      padding-top: 300px;
     }
     
