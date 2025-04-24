@@ -9,11 +9,29 @@
       --transition-speed: 0.25s;
     }
     
-    .card {
+    .background-animated {
+      background: linear-gradient(-45deg, #f0f0f0, #e0f7fa, #f0f0f0, #e0f7fa);
+      background-size: 400% 400%;
+      animation: gradientShift 10s ease infinite;
+      min-height: 100vh;
+    }
     
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    .card {
       background: rgba(22, 160, 133, 0.4);
       width: 450px;
-      height: 300px;    
+      height: 300px;
       margin-left: 440px;
       padding-top: 100px;
       padding-left: 60px;
