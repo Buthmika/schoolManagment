@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import './LandingPage.css';
+import Nav from '../nav/Nav';
 
 function LandingPage() {
   const [characterChecked, setCharacterChecked] = useState(false);
   const [leavingChecked, setLeavingChecked] = useState(false);
 
   return (
+<>
+    <Nav></Nav>  
     <div className="card">
       <div className="demo">
 
@@ -55,6 +58,7 @@ function LandingPage() {
 
       </div>
     </div>
+</>    
   );
 }
 
