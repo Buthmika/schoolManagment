@@ -1,0 +1,102 @@
+:root {
+      --primary: #16a085;
+      --background: linear-gradient(135deg, #f0f0f0, #e0f7fa, #f0f0f0, #e0f7fa);
+    }
+    
+    .marks-selection-bg {
+      background: var(--background);
+      background-size: 300% 300%;
+      animation: animateBg 12s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    @keyframes animateBg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .marks-selection-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+    
+    .marks-selection-container h2 {
+      margin-bottom: 30px;
+      font-size: 28px;
+      color: #333;
+    }
+    
+    .select-wrapper {
+      position: relative;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+    
+    .select-wrapper select {
+      width: 100%;
+      padding: 16px 12px 12px 12px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      background-color: transparent;
+      color: #333;
+      appearance: none;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+    
+    .select-wrapper select:focus {
+      border-color: var(--primary);
+    }
+    
+    .floating-label {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      color: #999;
+      font-size: 16px;
+      background: white;
+      padding: 0 4px;
+      pointer-events: none;
+      transition: 0.3s ease all;
+    }
+    
+    .select-wrapper select:focus + .floating-label,
+    .floating-label.selected {
+      top: -10px;
+      left: 12px;
+      font-size: 12px;
+      color: var(--primary);
+    }
+    
+    button {
+      background-color: var(--primary);
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(22, 160, 133, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(22, 160, 133, 0.5);
+    }
+    
+    button:active {
+      transform: scale(0.95);
+    }
+    
