@@ -1,8 +1,11 @@
 import React from 'react'
 import './Login.css'
 import background from '../../assets/login.jpg'
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
+   const navigate = useNavigate();
   return (
     <div className="login-wrapper" style={{ backgroundImage: `url(${background})` }}>
       
@@ -16,8 +19,8 @@ function Login() {
           <label htmlFor="password"><b>Password</b></label>
           <input type="password" id="password" name='password' placeholder="Enter your password" required />
         </div>
-        <div className="submit">
-          <button type="submit">Login</button>
+        <div className="submit1">
+          <button type="submit" onClick={() => navigate('/landingPage')}>Login</button>
         </div>
       </div>
     </div>
