@@ -29,14 +29,19 @@
     }
     
     .card {
-      background: rgba(22, 160, 133, 0.4);
-      width: 450px;
-      height: 300px;
-      margin-left: 440px;
-      padding-top: 100px;
-      padding-left: 60px;
+      background: rgba(165, 194, 188, 0.8);
+      width: 850px;
+      height: 400px;
+      margin-left: 250px;
+      padding-top: 10px;
+      padding-left: 120px;
       margin-top: 100px;
       border-radius: 30px;
+    }
+    .card .userName{
+      padding-left: 50px;
+      margin-bottom: 40px;
+      padding-top: 10px;
     }
     
     .toggle {
@@ -46,6 +51,7 @@
       font-weight: 700;
       margin-bottom: 16px;
       width: 300px;
+      margin-left: 130px;
     }
     
     .toggle__input {
@@ -110,5 +116,86 @@
     
     .toggle__input:checked + .toggle-track .checkMark {
       opacity: 1;
+    }
+    .marksButton{
+      margin-top: 50px;
+      width: 220px;
+     
+    }
+    .marksButton {
+      margin-top: 50px;
+      width: 100%;
+      display: flex;
+      padding-left: 120px;
+    }
+    
+    .marksButton button {
+      position: relative;
+      display: inline-block;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(135deg, #16a085, #1abc9c);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 20px rgba(22, 160, 133, 0.4);
+    }
+    
+    .marksButton button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: left 0.5s ease;
+      z-index: 0;
+    }
+    
+    .marksButton button:hover::before {
+      left: 0;
+    }
+    
+    .marksButton button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(22, 160, 133, 0.5);
+    }
+    
+    .certificateButton {
+      padding-left: 450px;
+      padding-top: 20px;
+      font-size: 20px;
+      font-weight: 600;
+      color: rgb(29, 28, 28);
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+      transition: color 0.3s ease;
+    }
+    
+    .certificateButton::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 20%;
+      background-color: #16a085;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+      margin-left: 430px;
+    }
+    
+    .certificateButton:hover::after {
+      transform: scaleX(1);
+    }
+    font{
+      font-size: 21px;
     }
     
