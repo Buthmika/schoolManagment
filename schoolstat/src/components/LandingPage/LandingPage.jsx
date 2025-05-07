@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './LandingPage.css';
 import Nav from '../nav/Nav';
-import arrowImage from '../../assets/arrow.jpg'; // Import your arrow image here
+import { useNavigate } from 'react-router-dom';
+
+// import arrowImage from '../../assets/arrow.jpg'; // Import your arrow image here
 
 function LandingPage() {
+     const navigate = useNavigate();
+  
   const [characterChecked, setCharacterChecked] = useState(false);
   const [leavingChecked, setLeavingChecked] = useState(false);
 
@@ -60,12 +64,12 @@ function LandingPage() {
               </span>
             </label>
             <div className="certificateButton">
-              Next ->
+              Next -
             </div>
 
           </div>
           <div className="marksButton">
-            <button >Do You Want To Viwe Your Marks</button>
+            <button  onClick={() => navigate('/markPage')}>Do You Want To Viwe Your Marks</button>
           </div>
         </div>
       </div>
