@@ -18,7 +18,7 @@ function HomePage() {
           <h1>
             Welcome to <span className="highlight animate-glow">SchoolStat</span>
           </h1>
-          <p>Get your Leaving & Character Certificates online</p>
+          <p>Get your Leaving & Character Certificates & Marks online</p>
           <h2>Simple & Fast Certificate Requests</h2>
           <p>Apply online with ease</p>
         </div>
