@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './LandingPage.css';
 import Nav from '../nav/Nav';
+import arrowImage from '../../assets/arrow.jpg'; // Import your arrow image here
 
 function LandingPage() {
   const [characterChecked, setCharacterChecked] = useState(false);
@@ -9,12 +10,14 @@ function LandingPage() {
   return (
     <>
       <Nav />
+      
       <div className="background-animated">
         <div className="card">
+        <div className="userName"><h1>Hi!! Buthmika What is Need You</h1></div>
           <div className="demo">
 
             <label className="toggle">
-              Character Certificate
+              <font>Character Certificate</font>
               <input
                 type="checkbox"
                 className="toggle__input"
@@ -36,7 +39,7 @@ function LandingPage() {
             </label>
 
             <label className="toggle">
-              Leaving Certificate
+              <font>Leaving Certificate</font>
               <input
                 type="checkbox"
                 className="toggle__input"
@@ -56,7 +59,13 @@ function LandingPage() {
                 </span>
               </span>
             </label>
+            <div className="certificateButton">
+              Next ->
+            </div>
 
+          </div>
+          <div className="marksButton">
+            <button >Do You Want To Viwe Your Marks</button>
           </div>
         </div>
       </div>
