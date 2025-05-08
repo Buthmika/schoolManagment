@@ -14,17 +14,17 @@ function App() {
   return (
     
     <>
-    {/* <Router>
+    <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/markPage" element={<MarkPage />} />
         <Route path="/landingPage" element={<LandingPage />} />
+        <Route path="/skillFormPage" element={<SkillFormPage />} />
       </Routes>
-    </Router> */}
-    {/* <LandingPage></LandingPage> */}
-    <SkillFormPage></SkillFormPage>
+    </Router>
+    
 ?    </>
   )
 }
