@@ -177,6 +177,10 @@
       display: inline-block;
       transition: color 0.3s ease;
     }
+    .certificateButton a{
+      text-decoration: none;
+      color: inherit;
+    }
     
     .certificateButton::after {
       content: '';
