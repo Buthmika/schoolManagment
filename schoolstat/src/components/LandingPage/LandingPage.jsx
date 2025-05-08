@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './LandingPage.css';
 import Nav from '../nav/Nav';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 // import arrowImage from '../../assets/arrow.jpg'; // Import your arrow image here
 
@@ -64,7 +66,7 @@ function LandingPage() {
               </span>
             </label>
             <div className="certificateButton">
-              Next -
+            <Link to="/skillFormPage">Next →</Link>
             </div>
 
           </div>
