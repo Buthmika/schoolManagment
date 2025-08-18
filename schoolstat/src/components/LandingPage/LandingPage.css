@@ -28,7 +28,16 @@
       }
     }
     
-   
+    .card {
+      background: rgba(165, 194, 188, 0.8);
+      width: 850px;
+      height: 400px;
+      margin-left: 410px;
+      padding-top: 10px;
+      padding-left: 120px;
+      margin-top: 100px;
+      border-radius: 30px;
+    }
     .card .userName{
       padding-left: 50px;
       margin-bottom: 40px;
