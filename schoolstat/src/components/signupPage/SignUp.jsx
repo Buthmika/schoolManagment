@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './SignUp.css';
 import SignUpImage from '../../assets/signup1.png';
 
+
 // firebase
 import { auth, db } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -51,8 +52,8 @@ function SignUp() {
         createdAt: new Date()
       });
 
-      alert("Signup successful!");
-      navigate("/home"); // go to homepage
+      // Redirect to HomePage after successful signup
+      navigate("/home");
 
     } catch (err) {
       alert("Error: " + err.message);

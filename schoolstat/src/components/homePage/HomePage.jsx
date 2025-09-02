@@ -4,6 +4,7 @@ import './homePage.css';
 import HomePageImage from '../../assets/homePage3.jpg';
 import { useNavigate } from 'react-router-dom';
 
+
 function HomePage() {
   const navigate = useNavigate();
 
@@ -24,8 +25,8 @@ function HomePage() {
         </div>
 
         <div className="button">
-          <button onClick={() => navigate('/SignUp')}>Sign Up</button>
-          <button onClick={() => navigate('/Login')}>Login</button>
+          <button onClick={() => navigate('/signup')}>Sign Up</button>
+          <button onClick={() => navigate('/login')}>Login</button>
         </div>
       </div>
     </div>
