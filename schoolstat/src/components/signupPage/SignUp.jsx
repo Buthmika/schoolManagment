@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import './SignUp.css';
 import SignUpImage from '../../assets/signup1.png';
 
-
 // firebase
 import { auth, db } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -20,12 +19,10 @@ function SignUp() {
 
   const navigate = useNavigate();
 
-  // input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,26 +32,22 @@ function SignUp() {
     }
 
     try {
-      // create user in firebase
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
-
       const user = userCredential.user;
 
-      // save extra info in firestore
       await setDoc(doc(db, "users", user.uid), {
         fullName: formData.fullName,
         email: formData.email,
         username: formData.username,
+        studentName: formData.fullName, // Save studentName
         createdAt: new Date()
       });
 
-      // Redirect to HomePage after successful signup
       navigate("/home");
-
     } catch (err) {
       alert("Error: " + err.message);
     }
@@ -69,15 +62,12 @@ function SignUp() {
         <div className="formDetail">
           <form className="signup-form" onSubmit={handleSubmit}>
             <h2>Sign Up to SchoolStat</h2>
-
             <input type="text" name="fullName" placeholder="Full Name" required onChange={handleChange} />
             <input type="email" name="email" placeholder="Email" required onChange={handleChange} />
             <input type="text" name="username" placeholder="Username" required onChange={handleChange} />
             <input type="password" name="password" placeholder="Password" required onChange={handleChange} />
             <input type="password" name="confirmPassword" placeholder="Confirm Password" required onChange={handleChange} />
-
             <button type="submit">Sign Up</button>
-
             <p className="login-link">
               Already have an account? <a href="/login">Login</a>
             </p>
