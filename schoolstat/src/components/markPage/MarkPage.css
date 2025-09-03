@@ -99,4 +99,73 @@
     button:active {
       transform: scale(0.95);
     }
-    
+    .info-display {
+  margin-top: 30px;
+  padding: 24px 32px;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(22, 160, 133, 0.15);
+  background: linear-gradient(135deg, #e0f7fa 60%, #b2dfdb 100%);
+  animation: fadeIn 0.7s;
+  border: 3px solid #16a085;
+  transition: border-color 0.3s;
+}
+
+.info-display.success {
+  border-color: #16a085;
+}
+
+.info-display.error {
+  border-color: #e74c3c;
+  background: #ffeaea;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.marks-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00796b;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.marks-meta {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.marks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.marks-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed #16a085;
+  font-size: 1.1rem;
+  color: #004d40;
+  transition: background 0.2s;
+}
+
+.marks-item:last-child {
+  border-bottom: none;
+}
+
+.subject {
+  font-weight: 600;
+}
+
+.mark {
+  background: #16a085;
+  color: #fff;
+  padding: 4px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(22, 160, 133, 0.12);
+}
