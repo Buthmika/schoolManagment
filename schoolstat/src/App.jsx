@@ -5,7 +5,7 @@ import SignUp from "./components/signupPage/SignUp";
 import MarkPage from "./components/markPage/MarkPage";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SkillFormPage from "./components/SkillPage/SkillFormPage";
-
+import AdminPanel from "./components/adminPanel/AdminPanel";
 function App() {
   return (
     <Router>
@@ -17,6 +17,8 @@ function App() {
         <Route path="/markPage" element={<MarkPage />} />
         <Route path="/landingPage" element={<LandingPage />} />
         <Route path="/skillFormPage" element={<SkillFormPage />} />
+        <Route path="/admin" element={<AdminPanel />} />
+
       </Routes>
     </Router>
   );
