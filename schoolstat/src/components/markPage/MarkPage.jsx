@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MarkPage.css';
-import { db } from "../../firebaseConfig";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { db, auth } from "../../firebaseConfig";
+import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
 
 function MarksSelection() {
   const [grade, setGrade] = useState('');
   const [term, setTerm] = useState('');
   const [info, setInfo] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [studentName, setStudentName] = useState('');
+
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (user) {
+      const fetchStudentName = async () => {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          setStudentName(userDoc.data().studentName || "");
+        }
+      };
+      fetchStudentName();
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,14 +33,15 @@ function MarksSelection() {
       const q = query(
         marksRef,
         where("grade", "==", grade),
-        where("term", "==", term)
+        where("term", "==", term),
+        where("studentName", "==", studentName)
       );
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
         setInfo(querySnapshot.docs[0].data());
       } else {
-        setInfo({ error: "No marks found for this grade and term." });
+        setInfo({ error: "No marks found for this grade, term, and student name." });
       }
     } catch (err) {
       setInfo({ error: "Error fetching data: " + err.message });
@@ -43,28 +58,17 @@ function MarksSelection() {
             <label className={`floating-label ${grade ? 'selected' : ''}`}>Grade</label>
             <select value={grade} onChange={(e) => setGrade(e.target.value)} required>
               <option value="" disabled hidden></option>
-              <option value="1">Grade 1</option>
-              <option value="2">Grade 2</option>
-              <option value="3">Grade 3</option>
-              <option value="4">Grade 4</option>
-              <option value="5">Grade 5</option>
-              <option value="6">Grade 6</option>
-              <option value="7">Grade 7</option>
-              <option value="8">Grade 8</option>
-              <option value="9">Grade 9</option>
-              <option value="10">Grade 10</option>
-              <option value="11">Grade 11</option>
-              <option value="12">Grade 12</option>
-              <option value="13">Grade 13</option>
+              <option value="8">1</option>
+              {/* Add other grades if needed */}
             </select>
           </div>
           <div className="select-wrapper">
             <label className={`floating-label ${term ? 'selected' : ''}`}>Term</label>
             <select value={term} onChange={(e) => setTerm(e.target.value)} required>
               <option value="" disabled hidden></option>
-              <option value="1">1st Term</option>
-              <option value="2">2nd Term</option>
-              <option value="3">3rd Term</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
             </select>
           </div>
           <button type="submit" disabled={loading}>
