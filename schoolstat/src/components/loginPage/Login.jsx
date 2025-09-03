@@ -2,30 +2,40 @@ import React, { useState } from 'react';
 import './Login.css';
 import background from '../../assets/login.jpg';
 import { useNavigate } from 'react-router-dom';
-
-// firebase
-import { auth } from "../../firebaseConfig";
+import { auth, db } from "../../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 function Login() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: ""
-  });
+  const [identifier, setIdentifier] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    let email = identifier;
+    if (!identifier.includes('@')) {
+      const q = query(collection(db, "users"), where("username", "==", identifier));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        email = querySnapshot.docs[0].data().email;
+      } else {
+        alert("No user found with that username.");
+        setLoading(false);
+        return;
+      }
+    }
+
     try {
-      await signInWithEmailAndPassword(auth, formData.email, formData.password);
-      navigate('/landingPage'); // redirect to LandingPage.jsx
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate('/landingPage');
     } catch (err) {
       alert("Login failed: " + err.message);
     }
+    setLoading(false);
   };
 
   return (
@@ -34,14 +44,15 @@ function Login() {
         <h1>Login to SchoolStat</h1>
         <form onSubmit={handleLogin}>
           <div className="userName">
-            <label htmlFor="email"><b>Email</b></label>
+            <label htmlFor="identifier"><b>Email or Username</b></label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Enter your email"
+              type="text"
+              id="identifier"
+              name="identifier"
+              placeholder="Enter your email or username"
               required
-              onChange={handleChange}
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
             />
           </div>
           <div className="password">
@@ -52,11 +63,14 @@ function Login() {
               name="password"
               placeholder="Enter your password"
               required
-              onChange={handleChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="submit1">
-            <button type="submit">Login</button>
+            <button type="submit" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
+            </button>
           </div>
         </form>
       </div>
