@@ -1,27 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LandingPage.css';
 import Nav from '../nav/Nav';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
-
-// import arrowImage from '../../assets/arrow.jpg'; // Import your arrow image here
+import { auth, db } from "../../firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 
 function LandingPage() {
-     const navigate = useNavigate();
-  
+  const navigate = useNavigate();
   const [characterChecked, setCharacterChecked] = useState(false);
   const [leavingChecked, setLeavingChecked] = useState(false);
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (user) {
+      const fetchUsername = async () => {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          setUsername(userDoc.data().username || "User");
+        } else {
+          setUsername("User");
+        }
+      };
+      fetchUsername();
+    }
+  }, []);
 
   return (
     <>
       <Nav />
-      
       <div className="background-animated">
         <div className="card">
-        <div className="userName"><h1>Hi!! Buthmika What is Need You</h1></div>
+          <div className="userName">
+            <h1>Hi!! {username} What is Need You</h1>
+          </div>
           <div className="demo">
-
             <label className="toggle">
               <font>Character Certificate</font>
               <input
@@ -43,7 +57,6 @@ function LandingPage() {
                 </span>
               </span>
             </label>
-
             <label className="toggle">
               <font>Leaving Certificate</font>
               <input
@@ -66,12 +79,11 @@ function LandingPage() {
               </span>
             </label>
             <div className="certificateButton">
-            <Link to="/skillFormPage">Next →</Link>
+              <Link to="/skillFormPage">Next →</Link>
             </div>
-
           </div>
           <div className="marksButton">
-            <button  onClick={() => navigate('/markPage')}>Do You Want To Viwe Your Marks</button>
+            <button onClick={() => navigate('/markPage')}>Do You Want To Viwe Your Marks</button>
           </div>
         </div>
       </div>
