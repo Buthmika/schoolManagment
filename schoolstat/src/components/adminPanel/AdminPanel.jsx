@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { db } from "../../firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
-import './AdminPanel.css';
+import './AdminPanel.css'; // Create and style as needed
 
 function AdminPanel() {
   const [form, setForm] = useState({
@@ -57,14 +57,14 @@ function AdminPanel() {
         <select name="grade" value={form.grade} onChange={handleChange} required>
           <option value="" disabled hidden>Grade</option>
           {[...Array(13)].map((_, i) => (
-            <option key={i+1} value={i+1}>{i+1}</option>
+            <option key={i+1} value={i+1}>Grade {i+1}</option>
           ))}
         </select>
         <select name="term" value={form.term} onChange={handleChange} required>
           <option value="" disabled hidden>Term</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <option value="1">1st Term</option>
+          <option value="2">2nd Term</option>
+          <option value="3">3rd Term</option>
         </select>
         <input name="maths" value={form.maths} onChange={handleChange} placeholder="Maths Marks" required />
         <input name="science" value={form.science} onChange={handleChange} placeholder="Science Marks" required />
