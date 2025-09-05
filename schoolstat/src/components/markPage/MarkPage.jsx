@@ -4,8 +4,9 @@ import { db, auth } from "../../firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 
 function MarksSelection() {
-  const [info, setInfo] = useState(null);
+  const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [studentName, setStudentName] = useState('');
 
   useEffect(() => {
     const user = auth.currentUser;
@@ -15,27 +16,23 @@ function MarksSelection() {
           const userDoc = await getDoc(doc(db, "users", user.uid));
           if (userDoc.exists()) {
             const data = userDoc.data();
-            if (data.marks) {
-              setInfo({
-                studentName: data.studentName,
-                grade: data.grade,
-                term: data.term,
-                marks: data.marks
-              });
+            setStudentName(data.studentName || "");
+            if (Array.isArray(data.marks) && data.marks.length > 0) {
+              setInfo(data.marks);
             } else {
-              setInfo({ error: "No marks found for your account." });
+              setInfo([]);
             }
           } else {
-            setInfo({ error: "User data not found." });
+            setInfo([]);
           }
-        } catch (err) {
-          setInfo({ error: "Error fetching data: " + err.message });
+        } catch {
+          setInfo([]);
         }
         setLoading(false);
       };
       fetchUserMarks();
     } else {
-      setInfo({ error: "User not logged in." });
+      setInfo([]);
       setLoading(false);
     }
   }, []);
@@ -46,25 +43,22 @@ function MarksSelection() {
         <h2>Your Marks Details</h2>
         {loading ? (
           <p>Loading...</p>
-        ) : info && (
-          <div className={`info-display animated-border ${info.error ? 'error' : 'success'}`}>
-            {info.error ? (
-              <p>{info.error}</p>
-            ) : (
-              <>
-                <h3 className="marks-title">Student: {info.studentName}</h3>
-                <p className="marks-meta">Grade: <span>{info.grade}</span> | Term: <span>{info.term}</span></p>
-                <ul className="marks-list">
-                  {info.marks && Object.entries(info.marks).map(([subject, mark]) => (
-                    <li key={subject} className="marks-item">
-                      <span className="subject">{subject}</span>
-                      <span className="mark">{mark}</span>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
+        ) : info.length === 0 ? (
+          <div className="info-display animated-border error">
+            <p>No marks found for your account.</p>
           </div>
+        ) : (
+          info.map((mark, idx) => (
+            <div key={idx} className="info-display animated-border success">
+              <h3 className="marks-title">Student: {studentName}</h3>
+              <p className="marks-meta">Grade: <span>{mark.grade}</span> | Term: <span>{mark.term}</span></p>
+              <ul className="marks-list">
+                <li className="marks-item"><span className="subject">Maths</span><span className="mark">{mark.maths}</span></li>
+                <li className="marks-item"><span className="subject">Science</span><span className="mark">{mark.science}</span></li>
+                <li className="marks-item"><span className="subject">Sinhala</span><span className="mark">{mark.sinhala}</span></li>
+              </ul>
+            </div>
+          ))
         )}
       </div>
     </div>
