@@ -76,3 +76,58 @@
 .form-submit-button:hover {
   background-color: rgba(22, 160, 133, 1);
 }
+/* Add to SkillFormPage.css */
+.certificate-preview {
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+  padding: 32px 24px;
+  margin-top: 32px;
+  animation: fadeInScale 1s cubic-bezier(0.23, 1, 0.32, 1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.certificate-preview h3 {
+  font-size: 2rem;
+  color: #0097a7;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+  font-family: 'Segoe Script', cursive;
+}
+
+.certificate-preview p {
+  font-size: 1.1rem;
+  color: #37474f;
+  margin: 8px 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.certificate-seal {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #ffeb3b 60%, #fbc02d 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 12px #fbc02d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #fff;
+  font-weight: bold;
+  animation: bounceSeal 1.2s infinite alternate;
+}
+
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: scale(0.7);}
+  100% { opacity: 1; transform: scale(1);}
+}
+
+@keyframes bounceSeal {
+  0% { transform: scale(1);}
+  100% { transform: scale(1.15);}
+}
