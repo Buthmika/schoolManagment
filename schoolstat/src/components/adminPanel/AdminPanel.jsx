@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { db } from "../../firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
-import './AdminPanel.css'; // Create and style as needed
+import { collection, query, where, getDocs, doc, updateDoc } from "firebase/firestore";
+import './AdminPanel.css';
 
 function AdminPanel() {
   const [form, setForm] = useState({
+    username: '',
     grade: '',
     term: '',
-    studentName: '',
     maths: '',
     science: '',
     sinhala: ''
@@ -24,21 +24,29 @@ function AdminPanel() {
     setLoading(true);
     setMessage('');
     try {
-      await addDoc(collection(db, "users"), {
+      // Find user by username
+      const q = query(collection(db, "users"), where("username", "==", form.username));
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.empty) {
+        setMessage("Student not found.");
+        setLoading(false);
+        return;
+      }
+      const userDoc = querySnapshot.docs[0];
+      await updateDoc(doc(db, "users", userDoc.id), {
         grade: form.grade,
         term: form.term,
-        studentName: form.studentName,
         marks: {
           maths: form.maths,
           science: form.science,
           sinhala: form.sinhala
         }
       });
-      setMessage("Marks added successfully!");
+      setMessage("Marks updated successfully!");
       setForm({
+        username: '',
         grade: '',
         term: '',
-        studentName: '',
         maths: '',
         science: '',
         sinhala: ''
@@ -53,11 +61,11 @@ function AdminPanel() {
     <div className="admin-panel">
       <h2>Add Student Marks (Admin Only)</h2>
       <form onSubmit={handleSubmit}>
-        <input name="studentName" value={form.studentName} onChange={handleChange} placeholder="Student Name" required />
+        <input name="username" value={form.username} onChange={handleChange} placeholder="Student Username" required />
         <select name="grade" value={form.grade} onChange={handleChange} required>
           <option value="" disabled hidden>Grade</option>
           {[...Array(13)].map((_, i) => (
-            <option key={i+1} value={i+1}>Grade {i+1}</option>
+            <option key={i+1} value={i+1}>{i+1}</option>
           ))}
         </select>
         <select name="term" value={form.term} onChange={handleChange} required>
