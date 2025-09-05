@@ -68,3 +68,20 @@
   color: #00796b;
   font-weight: 600;
 }
+.certificate-section {
+  border: 3px solid #0097a7;
+  border-radius: 18px;
+  padding: 28px 18px;
+  margin-top: 40px;
+  background: #f9fefc;
+  box-shadow: 0 4px 18px rgba(22,160,133,0.08);
+}
+
+.certificate-fade {
+  animation: fadeOutCert 0.7s forwards;
+}
+
+@keyframes fadeOutCert {
+  0% { opacity: 1; transform: scale(1);}
+  100% { opacity: 0; transform: scale(0.8);}
+}
