@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { db } from "../../firebaseConfig";
-import { collection, query, where, getDocs, doc, updateDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import './AdminPanel.css';
 
 function AdminPanel() {
@@ -34,15 +34,15 @@ function AdminPanel() {
       }
       const userDoc = querySnapshot.docs[0];
       await updateDoc(doc(db, "users", userDoc.id), {
-        grade: form.grade,
-        term: form.term,
-        marks: {
+        marks: arrayUnion({
+          grade: form.grade,
+          term: form.term,
           maths: form.maths,
           science: form.science,
           sinhala: form.sinhala
-        }
+        })
       });
-      setMessage("Marks updated successfully!");
+      setMessage("Marks added successfully!");
       setForm({
         username: '',
         grade: '',
