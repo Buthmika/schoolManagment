@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import './SignUp.css';
 import SignUpImage from '../../assets/signup1.png';
-
-// firebase
 import { auth, db } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
@@ -43,7 +41,10 @@ function SignUp() {
         fullName: formData.fullName,
         email: formData.email,
         username: formData.username,
-        studentName: formData.fullName, // Save studentName
+        studentName: formData.fullName,
+        grade: "",
+        term: "",
+        marks: {}, // empty marks initially
         createdAt: new Date()
       });
 
