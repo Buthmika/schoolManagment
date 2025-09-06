@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from "../../firebaseConfig";
-import { collection, query, where, getDocs, doc, updateDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import './AdminPanel.css';
 
 function AdminPanel() {
@@ -21,6 +21,10 @@ function AdminPanel() {
   const [certLoading, setCertLoading] = useState(true);
   const [fadingCertId, setFadingCertId] = useState(null);
 
+  // Collapsible section state
+  const [showPending, setShowPending] = useState(false);
+  const [showReviewed, setShowReviewed] = useState(false);
+
   useEffect(() => {
     // Fetch certificates for notification and viewing
     const fetchCertificates = async () => {
@@ -35,7 +39,11 @@ function AdminPanel() {
     fetchCertificates();
   }, []);
 
-  const pendingCount = certificates.filter(cert => cert.status === "pending").length;
+  // Separate pending and reviewed certificates
+  const pendingCertificates = certificates.filter(cert => cert.status === "pending");
+  const reviewedCertificates = certificates.filter(cert => cert.status === "reviewed");
+
+  const pendingCount = pendingCertificates.length;
 
   const handleMarkReviewed = async (id) => {
     setFadingCertId(id);
@@ -43,6 +51,7 @@ function AdminPanel() {
       await updateDoc(doc(db, "certificates", id), { status: "reviewed" });
       setCertificates(certs => certs.map(cert => cert.id === id ? { ...cert, status: "reviewed" } : cert));
       setFadingCertId(null);
+      // Optionally trigger backend function to send email
     }, 700); // Match animation duration
   };
 
@@ -65,15 +74,15 @@ function AdminPanel() {
       }
       const userDoc = querySnapshot.docs[0];
       await updateDoc(doc(db, "users", userDoc.id), {
-        grade: form.grade,
-        term: form.term,
-        marks: {
+        marks: arrayUnion({
+          grade: form.grade,
+          term: form.term,
           maths: form.maths,
           science: form.science,
           sinhala: form.sinhala
-        }
+        })
       });
-      setMessage("Marks updated successfully!");
+      setMessage("Marks added successfully!");
       setForm({
         username: '',
         grade: '',
@@ -90,7 +99,7 @@ function AdminPanel() {
 
   return (
     <div className="admin-panel">
-      {/* Marks Section (unchanged style/logic) */}
+      {/* Marks Section */}
       <h2>
         Add Student Marks (Admin Only)
       </h2>
@@ -115,9 +124,12 @@ function AdminPanel() {
       </form>
       {message && <p>{message}</p>}
 
-      {/* Certificate Section (separated, bordered, animated) */}
+      {/* Certificate Section - Pending */}
       <div className="certificate-section">
-        <h2>
+        <h2
+          style={{ cursor: "pointer", userSelect: "none" }}
+          onClick={() => setShowPending(show => !show)}
+        >
           Certificate Requests
           {pendingCount > 0 && (
             <span style={{
@@ -131,37 +143,83 @@ function AdminPanel() {
               {pendingCount}
             </span>
           )}
+          <span style={{ marginLeft: 10, fontSize: 18 }}>
+            {showPending ? "▲" : "▼"}
+          </span>
         </h2>
-        {certLoading ? (
-          <p>Loading certificates...</p>
-        ) : certificates.length === 0 ? (
-          <p>No certificate requests found.</p>
-        ) : (
-          certificates.map(cert => (
-            <div
-              key={cert.id}
-              className={`certificate-preview${fadingCertId === cert.id ? " certificate-fade" : ""}`}
-              style={{marginBottom: "24px"}}
-            >
-              <div className="certificate-seal">★</div>
-              <h3>Certificate Request</h3>
-              <p><strong>Name:</strong> {cert.fullName}</p>
-              <p><strong>Admission No:</strong> {cert.admissionNo}</p>
-              <p><strong>Grade:</strong> {cert.grade}</p>
-              <p><strong>Academic:</strong> {cert.academicType} - {cert.academicResults}</p>
-              <p><strong>Sports:</strong> {cert.sports}</p>
-              <p><strong>Leadership:</strong> {cert.leadership}</p>
-              <p><strong>Services:</strong> {cert.services}</p>
-              <p><strong>Achievements:</strong> {cert.achievements}</p>
-              <p><strong>Other Skills:</strong> {cert.otherSkills}</p>
-              <p><strong>Status:</strong> {cert.status}</p>
-              {cert.status === "pending" && (
-                <button className="form-submit-button" onClick={() => handleMarkReviewed(cert.id)}>
-                  Mark as Reviewed
-                </button>
-              )}
-            </div>
-          ))
+        {showPending && (
+          certLoading ? (
+            <p>Loading certificates...</p>
+          ) : pendingCertificates.length === 0 ? (
+            <p>No pending certificate requests found.</p>
+          ) : (
+            pendingCertificates.map(cert => (
+              <div
+                key={cert.id}
+                className={`certificate-preview${fadingCertId === cert.id ? " certificate-fade" : ""}`}
+                style={{marginBottom: "24px"}}
+              >
+                <div className="certificate-seal">★</div>
+                <h3>Certificate Request</h3>
+                <p><strong>Name:</strong> {cert.fullName}</p>
+                <p><strong>Admission No:</strong> {cert.admissionNo}</p>
+                <p><strong>Grade:</strong> {cert.grade}</p>
+                <p><strong>Academic:</strong> {cert.academicType} - {cert.academicResults}</p>
+                <p><strong>Sports:</strong> {cert.sports}</p>
+                <p><strong>Leadership:</strong> {cert.leadership}</p>
+                <p><strong>Services:</strong> {cert.services}</p>
+                <p><strong>Achievements:</strong> {cert.achievements}</p>
+                <p><strong>Other Skills:</strong> {cert.otherSkills}</p>
+                <p><strong>Status:</strong> {cert.status}</p>
+                {cert.status === "pending" && (
+                  <button className="form-submit-button" onClick={() => handleMarkReviewed(cert.id)}>
+                    Mark as Reviewed
+                  </button>
+                )}
+              </div>
+            ))
+          )
+        )}
+      </div>
+
+      {/* Certificate Section - Reviewed */}
+      <div className="certificate-section" style={{marginTop: "40px"}}>
+        <h2
+          style={{ cursor: "pointer", userSelect: "none" }}
+          onClick={() => setShowReviewed(show => !show)}
+        >
+          Reviewed Certificates
+          <span style={{ marginLeft: 10, fontSize: 18 }}>
+            {showReviewed ? "▲" : "▼"}
+          </span>
+        </h2>
+        {showReviewed && (
+          certLoading ? (
+            <p>Loading certificates...</p>
+          ) : reviewedCertificates.length === 0 ? (
+            <p>No reviewed certificates found.</p>
+          ) : (
+            reviewedCertificates.map(cert => (
+              <div
+                key={cert.id}
+                className="certificate-preview"
+                style={{marginBottom: "24px", opacity: 0.7}}
+              >
+                <div className="certificate-seal">★</div>
+                <h3>Certificate Request</h3>
+                <p><strong>Name:</strong> {cert.fullName}</p>
+                <p><strong>Admission No:</strong> {cert.admissionNo}</p>
+                <p><strong>Grade:</strong> {cert.grade}</p>
+                <p><strong>Academic:</strong> {cert.academicType} - {cert.academicResults}</p>
+                <p><strong>Sports:</strong> {cert.sports}</p>
+                <p><strong>Leadership:</strong> {cert.leadership}</p>
+                <p><strong>Services:</strong> {cert.services}</p>
+                <p><strong>Achievements:</strong> {cert.achievements}</p>
+                <p><strong>Other Skills:</strong> {cert.otherSkills}</p>
+                <p><strong>Status:</strong> {cert.status}</p>
+              </div>
+            ))
+          )
         )}
       </div>
     </div>
