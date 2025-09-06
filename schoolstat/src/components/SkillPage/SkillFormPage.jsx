@@ -36,14 +36,12 @@ const StudentForm = () => {
         setMessage("User not logged in.");
         return;
       }
-      // Save all form data to Firestore
       await addDoc(collection(db, "certificates"), {
         uid: user.uid,
         email: user.email,
         ...form,
         status: "pending"
       });
-      // Show temporary certificate/message
       setCertificate({ ...form, name: form.fullName });
       setMessage("Certificate generated temporarily. We will verify your information and respond via email.");
     } catch (err) {
@@ -59,6 +57,7 @@ const StudentForm = () => {
     <div className="form-container">
       <h2 className="form-title">Student Information Form</h2>
       <form onSubmit={handleSubmit}>
+        {/* ...form fields unchanged... */}
         <div className="form-group">
           <label className="form-label" htmlFor="fullName">Full Name</label>
           <input className="form-input" type="text" id="fullName" name="fullName" placeholder="Enter full name" value={form.fullName} onChange={handleChange} required />
