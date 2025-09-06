@@ -45,13 +45,42 @@ function AdminPanel() {
 
   const pendingCount = pendingCertificates.length;
 
+  // Formspree email sending function
+  const sendReviewEmailFormspree = (cert) => {
+    fetch("https://formspree.io/f/mkgvkwbb", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: cert.email,
+        name: cert.fullName,
+        message: `Hello ${cert.fullName}, your certificate request has been reviewed by the admin.your information is correct. Please come to school and collect your certificate.`
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.ok) {
+        console.log("Email sent via Formspree!");
+      } else {
+        console.error("Formspree error:", data);
+      }
+    })
+    .catch(error => {
+      console.error("Network error:", error);
+    });
+  };
+
   const handleMarkReviewed = async (id) => {
     setFadingCertId(id);
     setTimeout(async () => {
       await updateDoc(doc(db, "certificates", id), { status: "reviewed" });
       setCertificates(certs => certs.map(cert => cert.id === id ? { ...cert, status: "reviewed" } : cert));
       setFadingCertId(null);
-      // Optionally trigger backend function to send email
+      // Find the certificate and send email via Formspree
+      const cert = certificates.find(c => c.id === id);
+      if (cert && cert.email) sendReviewEmailFormspree(cert);
     }, 700); // Match animation duration
   };
 
@@ -73,15 +102,16 @@ function AdminPanel() {
         return;
       }
       const userDoc = querySnapshot.docs[0];
-      await updateDoc(doc(db, "users", userDoc.id), {
-        marks: arrayUnion({
-          grade: form.grade,
-          term: form.term,
-          maths: form.maths,
-          science: form.science,
-          sinhala: form.sinhala
-        })
-      });
+      // ...existing code...
+await updateDoc(doc(db, "users", userDoc.id), {
+  marks: arrayUnion({
+    grade: form.grade,
+    term: form.term,
+    maths: Number(form.maths),
+    science: Number(form.science),
+    sinhala: Number(form.sinhala)
+  })
+});
       setMessage("Marks added successfully!");
       setForm({
         username: '',
