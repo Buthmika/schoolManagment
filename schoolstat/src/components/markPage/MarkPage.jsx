@@ -4,8 +4,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import "./MarkPage.css";
 
-// Group marks by grade and term
 function groupMarksByGradeTerm(marksArray) {
+  // Each mark entry should have grade and term
   const grouped = {};
   marksArray.forEach(mark => {
     const grade = mark.grade || "";
@@ -104,6 +104,13 @@ function MarkPage() {
                       <li className="marks-item">
                         <span className="subject">Sinhala</span>
                         <span className="mark">{mark.sinhala}</span>
+                      </li>
+                    )}
+                    {/* For backward compatibility with object format */}
+                    {mark.subject && (
+                      <li className="marks-item">
+                        <span className="subject">{mark.subject}</span>
+                        <span className="mark">{mark.value}</span>
                       </li>
                     )}
                   </React.Fragment>
