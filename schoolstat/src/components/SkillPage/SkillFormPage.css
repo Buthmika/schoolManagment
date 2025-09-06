@@ -131,3 +131,26 @@
   0% { transform: scale(1);}
   100% { transform: scale(1.15);}
 }
+/* ...existing code... */
+
+.animated-certificate-message {
+  animation: fadeInCertMsg 1s;
+  background: linear-gradient(135deg, #e0f7fa 60%, #b2dfdb 100%);
+  border: 2px solid #16a085;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(22, 160, 133, 0.12);
+  color: #00796b;
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 24px 32px;
+  margin-top: 24px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+@keyframes fadeInCertMsg {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* ...existing code... */
